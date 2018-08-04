@@ -2,33 +2,31 @@ import React from 'react'
 import {FlatList, StyleSheet, Text, View, TouchableOpacity, Button, Image} from 'react-native'
 import Row from '../Components/Row'
 import {List} from 'react-native-elements'
-import axios from 'axios'
+import fetchList from '../Network/Api'
 
 
 export default class ScreenBook extends React.Component {
   static navigationOptions = ({navigation}) => ({
     headerTitle: navigation.getParam('list'),
+    headerTintColor: '#fff',
     headerStyle: {
-      backgroundColor: '#f5f5f5',
+      backgroundColor: '#cc2a36',
     },
   })
 
   state = {
     books: [],
     encodedName: '',
-    apiKey: 'e23d8891dde4b093681f4f541d5e24ac:17:73864633',
-    baseUrl: 'https://api.nytimes.com/svc/books/v3/lists/',
   }
 
-  handleFetchReq = async (list) => {
-    const {apiKey, baseUrl, encodedName} = this.state
-    const response = await axios.get(`${baseUrl}${list}?&api-key=${apiKey}`)
+  getBooks = async (list) => {
+    const response = await fetchList(list)
     this.setState({books: [...response.data.results.books]})
   }
 
   componentDidMount() {
     const list = this.props.navigation.getParam('title')
-    this.handleFetchReq(list)
+    this.getBooks(list)
   }
 
   renderSeparator = () => {
