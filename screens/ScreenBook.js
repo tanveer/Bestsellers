@@ -7,7 +7,7 @@ import axios from 'axios'
 
 export default class ScreenBook extends React.Component {
   static navigationOptions = ({navigation}) => ({
-    headerTitle: 'Bestsellers'.toUpperCase(),
+    headerTitle: navigation.getParam('list'),
     headerStyle: {
       backgroundColor: '#f5f5f5',
     },
@@ -49,7 +49,7 @@ export default class ScreenBook extends React.Component {
       <List containerStyle={{borderTopWidth: 0, borderBottomWidth: 0, marginTop: 0,}}>
         <FlatList
           data={this.state.books}
-          renderItem={({item}) => <Row {...item} />}
+          renderItem={({item}) => <Row {...item} updated={this.props.navigation.getParam('updated')}/>}
           ItemSeparatorComponent={this.renderSeparator}
           keyExtractor={item => item.title}/>
       </List>

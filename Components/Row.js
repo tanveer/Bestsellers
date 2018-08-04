@@ -15,11 +15,13 @@ export default Row = props => (
       title={
         <View style={{paddingLeft: 10,}}>
           <Text style={styles.title}>{props.title}</Text>
-          <Text>{'Author: ' + props.author}</Text>
-          <Text>{'Rank: ' + props.rank}</Text>
-          <Text>{'Weeks on list: ' + props.weeks_on_list}</Text>
+          <Text style={styles.subtitle}>{props.author}</Text>
+          <Text style={styles.text}>{'Rank: ' + props.rank}</Text>
+          <Text style={styles.text}>{'Weeks on list: ' + props.weeks_on_list}</Text>
+          <Text style={styles.text}>{'Updated: ' + props.updated}</Text>
         </View>
       }
+       hideChevron={true}
       containerStyle={{borderBottomWidth: 0,}} />
   </TouchableOpacity>
 )
@@ -29,19 +31,32 @@ const styles = StyleSheet.create({
     padding: 5,
     alignItems: 'center',
     flexDirection: 'row',
-    },
-    title:{
-      paddingBottom: 5,
-      fontSize: 12,
-      fontFamily: 'Helvetica-Bold',
-    },
-    image: {
-      width: 50,
-      height: 50,
-      marginRight: 10,
-    },
-    view: {
-      flex: 1,
-      flexWrap: 'wrap'
-    },
+  },
+
+  title:{
+    fontSize: 12,
+    fontFamily: 'Helvetica-Bold',
+  },
+
+  subtitle: {
+    fontFamily: 'HelveticaNeue-Light',
+    fontSize: 11,
+    paddingBottom: 5,
+  },
+
+  text: {
+    fontFamily: 'Helvetica Neue',
+    fontSize: 12,
+  },
+
+  image: {
+    width: 50,
+    height: 50,
+    marginRight: 10,
+  },
+
+  view: {
+    flex: 1,
+    flexWrap: 'wrap'
+  },
 })

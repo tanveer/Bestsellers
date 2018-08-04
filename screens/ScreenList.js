@@ -6,7 +6,7 @@ import axios from 'axios'
 
 export default class ScreenList extends React.Component {
   static navigationOptions = ({navigation}) => ({
-    headerTitle: 'Bestsellers List'.toUpperCase(),
+    headerTitle: 'Bestsellers'.toUpperCase(),
     headerStyle: {
       backgroundColor: '#f5f5f5',
     },
@@ -45,7 +45,12 @@ export default class ScreenList extends React.Component {
   }
 
   renderItem = ({item}) => (
-    <TouchableOpacity  onPress={() => this.props.navigation.navigate('ScreenBook', {title: item.list_name_encoded})} >
+    <TouchableOpacity  onPress={() => this.props.navigation.navigate('ScreenBook',
+          {
+            title: item.list_name_encoded,
+            list: item.list_name,
+            updated: item.updated,
+          })} >
       <ListItem
         title={item.list_name}
         containerStyle={{borderBottomWidth: 0}}
