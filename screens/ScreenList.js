@@ -2,6 +2,8 @@ import React from 'react'
 import {FlatList, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import {List, ListItem} from 'react-native-elements';
 import fetchList from '../Network/Api'
+import ListRw from '../Components/ListRow'
+import Devider from '../Components/devider'
 
 
 export default class ScreenList extends React.Component {
@@ -28,31 +30,13 @@ export default class ScreenList extends React.Component {
     this.setState({lists: [...response.data.results]})
   }
 
-  renderSeparator = () => {
-    return (
-      <View
-        style={{
-          backgroundColor: '#cccccc',
-          width: '90%',
-          height: 1,
-          marginLeft: '5%',
-        }}
-      />
-    )
-  }
+
+renderDevider = () => (
+  <Devider />
+)
 
   renderItem = ({item}) => (
-    <TouchableOpacity  onPress={() => this.props.navigation.navigate('ScreenBook',
-          {
-            title: item.list_name_encoded,
-            list: item.list_name,
-            updated: item.updated,
-          })} >
-      <ListItem
-        title={item.list_name}
-        containerStyle={{borderBottomWidth: 0}}
-      />
-    </TouchableOpacity>
+    <ListRw {...item} navigation={this.props.navigation} />
   )
 
   render() {
@@ -62,7 +46,7 @@ export default class ScreenList extends React.Component {
             data={this.state.lists}
             keyExtractor={item => item.list_name_encoded}
             renderItem={this.renderItem}
-            ItemSeparatorComponent={this.renderSeparator}
+            ItemSeparatorComponent={this.renderDevider}
           />
         </List>
     );
