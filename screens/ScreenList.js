@@ -2,7 +2,7 @@ import React from 'react'
 import {FlatList, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import {List, ListItem} from 'react-native-elements';
 import fetchList from '../Network/Api'
-import ListRw from '../Components/ListRow'
+import ListRow from '../Components/ListRow'
 import Devider from '../Components/devider'
 
 
@@ -36,7 +36,7 @@ renderDevider = () => (
 )
 
   renderItem = ({item}) => (
-    <ListRw {...item} navigation={this.props.navigation} />
+    <ListRow {...item} navigation={this.props.navigation} />
   )
 
   render() {

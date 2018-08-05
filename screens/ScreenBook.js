@@ -3,6 +3,7 @@ import {FlatList, StyleSheet, Text, View, TouchableOpacity, Button, Image} from 
 import Row from '../Components/Row'
 import {List} from 'react-native-elements'
 import fetchList from '../Network/Api'
+import Devider from '../Components/devider'
 
 
 export default class ScreenBook extends React.Component {
@@ -28,19 +29,9 @@ export default class ScreenBook extends React.Component {
     const list = this.props.navigation.getParam('title')
     this.getBooks(list)
   }
-
-  renderSeparator = () => {
-    return (
-      <View
-        style={{
-          backgroundColor: '#cccccc',
-          width: '90%',
-          height: 1,
-          marginLeft: '5%',
-        }}
-      />
-    )
-  }
+  renderDevider = () => (
+    <Devider />
+  )
 
   render() {
     return (
@@ -48,7 +39,7 @@ export default class ScreenBook extends React.Component {
         <FlatList
           data={this.state.books}
           renderItem={({item}) => <Row {...item} updated={this.props.navigation.getParam('updated')}/>}
-          ItemSeparatorComponent={this.renderSeparator}
+          ItemSeparatorComponent={this.renderDevider}
           keyExtractor={item => item.title}/>
       </List>
     )
