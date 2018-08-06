@@ -52,7 +52,6 @@ export default class ScreenOverview extends React.Component {
       <ScrollView>
         {
           data.map(book => (
-            <List>
               <FlatList
                 horizontal
                 data={book}
@@ -61,7 +60,6 @@ export default class ScreenOverview extends React.Component {
                 }
                 keyExtractor={item => item.title}
               />
-            </List>
           ))
         }
       </ScrollView>

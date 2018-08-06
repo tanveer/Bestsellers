@@ -1,8 +1,9 @@
 import React from 'react';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator, createSwitchNavigator } from 'react-navigation';
 import ScreenComponentList from './ScreenList'
 import ScreenComponentBook from './ScreenBook'
 import ScreenComponentOverview from './ScreenOverview'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 const ListNavigator = createStackNavigator ({
   ScreenList: ScreenComponentList,
@@ -10,14 +11,53 @@ const ListNavigator = createStackNavigator ({
   initialRouteName: 'ScreenList',
 });
 
+ListNavigator.navigationOptions = {
+  tabBarIcon: ({focused, tintColor}) => (
+    <Ionicons
+      name={`ios-list${focused ? '' : '-outline'}`}
+      size={30}
+      color={tintColor}
+    />
+  )
+}
+
 const OverviewNavigator = createStackNavigator ({
   Overview: ScreenComponentOverview,
   initialRouteName: 'Overview',
 });
 
-const AppNavigator = createBottomTabNavigator({
-  Overview: OverviewNavigator,
-  List: ListNavigator,
-});
+OverviewNavigator.navigationOptions = {
+  tabBarIcon: ({focused, tintColor}) => (
+    <Ionicons
+      name={`ios-star${focused ? '' : '-outline'}`}
+      size={30}
+      color={tintColor}
+    />
+  )
+}
+
+const MainTabNavigator = createBottomTabNavigator({
+    Bestsellers: OverviewNavigator,
+    List: ListNavigator,
+  },
+    {
+      tabBarOptions: {
+        activeTintColor: '#fff',
+      labelStyle: {
+        fontSize: 14,
+      },
+      style: {
+        backgroundColor: '#cc2a36',
+      },
+    },
+  }
+)
+
+
+const AppNavigator = createSwitchNavigator(
+  {
+    Tab: MainTabNavigator,
+  }
+)
 
 export default AppNavigator;
