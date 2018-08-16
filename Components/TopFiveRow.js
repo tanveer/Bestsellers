@@ -6,17 +6,18 @@ export default TopFiveRow = props => (
     <TouchableOpacity>
       <ListItem
         avatar={
-          <Avatar
-            source={{uri: props.book_image}}
-            height={100}
-            width={65}
-           />
-         }
+            <Avatar
+              source={{uri: props.book_image}}
+              height={100}
+              width={65}
+            />
+        }
         hideChevron={true}
         containerStyle={{borderBottomWidth: 0,}}
         />
      </TouchableOpacity>
  )
+ 
 const styles = StyleSheet.create({
   row: {
     padding: 5,
