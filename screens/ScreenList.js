@@ -30,7 +30,7 @@ class ScreenList extends React.Component {
     )
 
     render() {
-      const {list_names} = this.props
+      const {list_names} = this.props.list_names
       return (
         <List containerStyle={{borderTopWidth: 0, borderBottomWidth: 0, marginTop: 0,}}>
             <FlatList
@@ -47,7 +47,7 @@ class ScreenList extends React.Component {
   mapStateToProps = (state) => {
     const {list_names} = state.list_names
     return {
-      list_names: list_names
+      list_names: state.list_names
     }
   }
 

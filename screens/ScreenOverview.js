@@ -1,12 +1,11 @@
 import React from 'react'
-import {FlatList, SectionList, ScrollView, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { FlatList, ScrollView, Text, View } from 'react-native'
 import TopFiveRow from '../Components/TopFiveRow'
-import {fetchFromBestsellerAPI} from '../actions'
-import {connect} from 'react-redux'
-
+import { fetchFromBestsellerAPI } from '../actions'
+import { connect } from 'react-redux'
 
 class ScreenOverview extends React.Component {
-  static navigationOptions = ({navigation}) => ({
+  static navigationOptions = ({ navigation }) => ({
     headerTitle: 'Bestsellers'.toUpperCase(),
     headerTintColor: 'white',
     headerBackTitle: null,
@@ -19,18 +18,45 @@ class ScreenOverview extends React.Component {
     this.props.getBestsellers()
   }
 
-  render() {
-    const {lists, isFetching} = this.props.lists
-    const books = lists.map(list => list.books)
+  renderList = (data) => {
+    return (
+      <FlatList style={{ paddingTop: 10, paddingBottom: 10, }}
+        horizontal
+        data={data}
+        renderItem={({ item }) =>
+          <TopFiveRow {...item} />
+        }
+        keyExtractor={item => item.listName}
+        >
+      </FlatList>
+    )
+  }
 
-    if(isFetching) {
+  sectionHeader = (section) => {
+    return (
+      <View style={{ backgroundColor: '#DDDDDD', height: 30, justifyContent: 'center', alignItems: 'center' }}>
+        <Text style={{ fontSize: 14, fontWeight: 'bold' }}>{section}</Text>
+      </View>
+    )
+  }
+
+  render() {
+    const { lists, isFetching } = this.props.lists
+    const bestellers = lists.map(list => ({ listName: list.display_name, data: list.books }))
+
+    if (isFetching) {
       <Text>Loading...</Text>
-    } 
-  
+    }
+
     return (
       <ScrollView>
         {
-          books.map(book => <FlatList horizontal data={book} renderItem={({item}) => <TopFiveRow {...item} />} />)
+          bestellers.map(books => 
+          <View style={{flex: 1,}}>
+            {this.sectionHeader(books.listName)}
+            {this.renderList(books.data)}
+          </View>
+          )
         }
       </ScrollView>
     );
@@ -43,4 +69,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {getBestsellers: fetchFromBestsellerAPI})(ScreenOverview);
+export default connect(mapStateToProps, { getBestsellers: fetchFromBestsellerAPI })(ScreenOverview);
