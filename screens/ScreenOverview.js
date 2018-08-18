@@ -3,14 +3,16 @@ import { FlatList, ScrollView, Text, View } from 'react-native'
 import TopFiveRow from '../Components/TopFiveRow'
 import { fetchFromBestsellerAPI } from '../actions'
 import { connect } from 'react-redux'
+import {Color} from '../src/Color'
+
 
 class ScreenOverview extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     headerTitle: 'Bestsellers'.toUpperCase(),
-    headerTintColor: 'white',
+    headerTintColor: Color.white,
     headerBackTitle: null,
     headerStyle: {
-      backgroundColor: '#cc2a36',
+      backgroundColor: Color.tomato1,
     },
   })
 
@@ -20,7 +22,7 @@ class ScreenOverview extends React.Component {
 
   renderList = (data) => {
     return (
-      <FlatList style={{ paddingTop: 10, paddingBottom: 10, }}
+      <FlatList style={{ paddingTop: 10, paddingBottom: 10, backgroundColor: Color.white}}
         horizontal
         data={data}
         renderItem={({ item }) =>
@@ -34,7 +36,7 @@ class ScreenOverview extends React.Component {
 
   sectionHeader = (section) => {
     return (
-      <View style={{ backgroundColor: '#DDDDDD', height: 30, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={{ backgroundColor: Color.light_grey, height: 30, justifyContent: 'center', alignItems: 'center' }}>
         <Text style={{ fontSize: 14, fontWeight: 'bold' }}>{section}</Text>
       </View>
     )

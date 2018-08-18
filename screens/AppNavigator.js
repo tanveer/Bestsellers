@@ -4,6 +4,7 @@ import ScreenComponentList from './ScreenList'
 import ScreenComponentBook from './ScreenBook'
 import ScreenComponentOverview from './ScreenOverview'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import {Color} from '../src/Color'
 
 const ListNavigator = createStackNavigator ({
   ScreenList: ScreenComponentList,
@@ -42,12 +43,12 @@ const MainTabNavigator = createBottomTabNavigator({
   },
     {
       tabBarOptions: {
-        activeTintColor: '#fff',
+        activeTintColor: Color.white,
       labelStyle: {
         fontSize: 14,
       },
       style: {
-        backgroundColor: '#cc2a36',
+        backgroundColor: Color.tomato1,
       },
     },
   }

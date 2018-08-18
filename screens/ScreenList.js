@@ -5,15 +5,16 @@ import ListRow from '../Components/ListRow'
 import Devider from '../Components/devider'
 import { connect } from 'react-redux'
 import {fetchBestsellerListName } from '../actions'
+import {Color} from '../src/Color'
 
 
 class ScreenList extends React.Component {
   static navigationOptions = ({navigation}) => ({
     headerTitle: 'Bestsellers'.toUpperCase(),
-    headerTintColor: 'white',
+    headerTintColor: Color.white,
     headerBackTitle: null,
     headerStyle: {
-      backgroundColor: '#cc2a36',
+      backgroundColor: Color.tomato1,
     },
   })
 
@@ -32,7 +33,7 @@ class ScreenList extends React.Component {
     render() {
       const {list_names} = this.props.list_names
       return (
-        <List containerStyle={{borderTopWidth: 0, borderBottomWidth: 0, marginTop: 0,}}>
+        <List containerStyle={{borderTopWidth: 0, borderBottomWidth: 0, marginTop: 0, backgroundColor: Color.white}}>
             <FlatList
               data={list_names}
               keyExtractor={item => item.list_name_encoded}
