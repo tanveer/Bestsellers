@@ -4,14 +4,15 @@ import Row from '../Components/Row'
 import {List} from 'react-native-elements'
 import fetchList from '../Network/Api'
 import Devider from '../Components/devider'
+import { Color } from '../src/Color';
 
 
 export default class ScreenBook extends React.Component {
   static navigationOptions = ({navigation}) => ({
     headerTitle: navigation.getParam('list'),
-    headerTintColor: '#fff',
+    headerTintColor: Color.white,
     headerStyle: {
-      backgroundColor: '#cc2a36',
+      backgroundColor: Color.tomato1,
     },
   })
 
