@@ -1,32 +1,33 @@
 
 import {
-    FETCH_STARTED, 
-    BEST_SELLERS_SUCCESS, 
+    FETCH_STARTED,
+    BEST_SELLERS_SUCCESS,
     BEST_SELLERS_FAILURE,
     LIST_NAME,
     LIST_NAME_SUCCESS,
-    LIST_NAME_FAILURE} from './actions'
+    LIST_NAME_FAILURE
+} from './actions'
 
-import {combineReducers} from 'redux'
+import { combineReducers } from 'redux'
 
-    const intialState = {
-        lists: [],
-        list_names: [],
-        isFetching: false,
-        error: false,
-    }
+const intialState = {
+    lists: [],
+    list_names: [],
+    isFetching: false,
+    error: false,
+}
 
 const bestsellerReducer = (state = intialState, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case FETCH_STARTED:
             return {
                 ...state,
                 lists: [],
                 isFetching: true,
             }
-        case BEST_SELLERS_SUCCESS: 
+        case BEST_SELLERS_SUCCESS:
             return {
-                ...state, 
+                ...state,
                 isFetching: false,
                 lists: action.payload
             }
@@ -41,10 +42,10 @@ const bestsellerReducer = (state = intialState, action) => {
 }
 
 const listnameReducer = (state = intialState, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case LIST_NAME:
             return {
-                ...state, 
+                ...state,
                 list_names: [],
                 isFetching: true
             }
@@ -56,11 +57,11 @@ const listnameReducer = (state = intialState, action) => {
             }
         case LIST_NAME_FAILURE:
             return {
-                ...state, 
+                ...state,
                 error: true
             }
-        default: 
-        return state
+        default:
+            return state
     }
 }
 

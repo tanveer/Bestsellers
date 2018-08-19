@@ -1,10 +1,12 @@
 import React from 'react'
-import { FlatList, ScrollView, Text, View } from 'react-native'
+import { Dimensions, FlatList, StyleSheet, Text, View } from 'react-native'
 import TopFiveRow from '../Components/TopFiveRow'
 import { fetchFromBestsellerAPI } from '../actions'
 import { connect } from 'react-redux'
-import {Color} from '../src/Color'
+import { Color } from '../src/Color'
+import { _ } from 'lodash'
 
+const DEVICE_WIDTH = Dimensions.get('window').width
 
 class ScreenOverview extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -20,47 +22,27 @@ class ScreenOverview extends React.Component {
     this.props.getBestsellers()
   }
 
-  renderList = (data) => {
-    return (
-      <FlatList style={{ paddingTop: 10, paddingBottom: 10, backgroundColor: Color.white}}
-        horizontal
-        data={data}
-        renderItem={({ item }) =>
-          <TopFiveRow {...item} />
-        }
-        keyExtractor={item => item.listName}
-        >
-      </FlatList>
-    )
-  }
-
-  sectionHeader = (section) => {
-    return (
-      <View style={{ backgroundColor: Color.light_grey, height: 30, justifyContent: 'center', alignItems: 'center' }}>
-        <Text style={{ fontSize: 14, fontWeight: 'bold' }}>{section}</Text>
-      </View>
-    )
-  }
-
   render() {
     const { lists, isFetching } = this.props.lists
     const bestellers = lists.map(list => ({ listName: list.display_name, data: list.books }))
+    const flatten = _.flatten(bestellers.map(books => books.data))
+    let books = flatten.map(f => f.book_image)
+    books = _.uniq(books)
 
     if (isFetching) {
       <Text>Loading...</Text>
     }
 
     return (
-      <ScrollView>
-        {
-          bestellers.map(books => 
-          <View style={{flex: 1,}}>
-            {this.sectionHeader(books.listName)}
-            {this.renderList(books.data)}
-          </View>
-          )
+      <FlatList style={styles.list}
+        data={books}
+        renderItem={({ item }) =>
+          <TopFiveRow imageLink={item} />
         }
-      </ScrollView>
+        numColumns={4}
+        keyExtractor={item => item}
+      >
+      </FlatList>
     );
   }
 }
@@ -70,5 +52,14 @@ const mapStateToProps = (state) => {
     lists: state.lists
   }
 }
+
+const styles = StyleSheet.create({
+  list: {
+    backgroundColor:
+      Color.white,
+    flex: 1,
+  },
+
+})
 
 export default connect(mapStateToProps, { getBestsellers: fetchFromBestsellerAPI })(ScreenOverview);

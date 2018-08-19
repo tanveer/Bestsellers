@@ -1,15 +1,15 @@
 import React from 'react'
-import {FlatList, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import {List, ListItem} from 'react-native-elements';
+import { FlatList, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { List, ListItem } from 'react-native-elements';
 import ListRow from '../Components/ListRow'
 import Devider from '../Components/devider'
 import { connect } from 'react-redux'
-import {fetchBestsellerListName } from '../actions'
-import {Color} from '../src/Color'
+import { fetchBestsellerListName } from '../actions'
+import { Color } from '../src/Color'
 
 
 class ScreenList extends React.Component {
-  static navigationOptions = ({navigation}) => ({
+  static navigationOptions = ({ navigation }) => ({
     headerTitle: 'Bestsellers'.toUpperCase(),
     headerTintColor: Color.white,
     headerBackTitle: null,
@@ -26,30 +26,30 @@ class ScreenList extends React.Component {
     <Devider />
   )
 
-    renderItem = ({item}) => (
-      <ListRow {...item} navigation={this.props.navigation} />
-    )
+  renderItem = ({ item }) => (
+    <ListRow {...item} navigation={this.props.navigation} />
+  )
 
-    render() {
-      const {list_names} = this.props.list_names
-      return (
-        <List containerStyle={{borderTopWidth: 0, borderBottomWidth: 0, marginTop: 0, backgroundColor: Color.white}}>
-            <FlatList
-              data={list_names}
-              keyExtractor={item => item.list_name_encoded}
-              renderItem={this.renderItem}
-              ItemSeparatorComponent={this.renderDevider}
-            />
-        </List>
-      );
-    }
+  render() {
+    const { list_names } = this.props.list_names
+    return (
+      <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0, marginTop: 0, backgroundColor: Color.white }}>
+        <FlatList
+          data={list_names}
+          keyExtractor={item => item.list_name_encoded}
+          renderItem={this.renderItem}
+          ItemSeparatorComponent={this.renderDevider}
+        />
+      </List>
+    );
   }
+}
 
-  mapStateToProps = (state) => {
-    const {list_names} = state.list_names
-    return {
-      list_names: state.list_names
-    }
+mapStateToProps = (state) => {
+  const { list_names } = state.list_names
+  return {
+    list_names: state.list_names
   }
+}
 
-  export default connect(mapStateToProps, {fetchListnames: fetchBestsellerListName})(ScreenList)
+export default connect(mapStateToProps, { fetchListnames: fetchBestsellerListName })(ScreenList)
