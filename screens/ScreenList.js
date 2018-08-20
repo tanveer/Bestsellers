@@ -7,7 +7,6 @@ import { connect } from 'react-redux'
 import { fetchFromBestsellerAPI } from '../actions'
 import { Color } from '../src/Color'
 
-
 class ScreenList extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     headerTitle: 'Bestsellers'.toUpperCase(),
@@ -39,7 +38,7 @@ class ScreenList extends React.Component {
       listNameEncoded: list.list_name_encoded,
       listId: list.list_id,
     }))
-
+    
     return (
       <List containerStyle={styles.container}>
         <FlatList
@@ -52,7 +51,6 @@ class ScreenList extends React.Component {
     );
   }
 }
-
 
 const mapStateToProps = (state) => {
   return {
@@ -70,4 +68,3 @@ const styles = StyleSheet.create({
 })
 
 export default connect(mapStateToProps, { getBestSellerList: fetchFromBestsellerAPI })(ScreenList);
-
