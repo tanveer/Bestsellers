@@ -1,10 +1,10 @@
 import React from 'react'
-import { FlatList, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import { List, ListItem } from 'react-native-elements';
+import { FlatList, StyleSheet, } from 'react-native'
+import { List } from 'react-native-elements';
 import ListRow from '../Components/ListRow'
 import Devider from '../Components/devider'
 import { connect } from 'react-redux'
-import { fetchBestsellerListName } from '../actions'
+import { fetchFromBestsellerAPI } from '../actions'
 import { Color } from '../src/Color'
 
 
@@ -19,25 +19,33 @@ class ScreenList extends React.Component {
   })
 
   componentDidMount() {
-    this.props.fetchListnames()
+    this.props.getBestSellerList()
   }
 
   renderDevider = () => (
     <Devider />
   )
 
-  renderItem = ({ item }) => (
+  renderItem = (item) => (
     <ListRow {...item} navigation={this.props.navigation} />
   )
 
   render() {
-    const { list_names } = this.props.list_names
+    const { lists, isFetching } = this.props.lists
+    const data = lists.map(list => ({
+      listName: list.display_name,
+      listImage: list.list_image,
+      updated: list.updated,
+      listNameEncoded: list.list_name_encoded,
+      listId: list.list_id,
+    }))
+
     return (
-      <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0, marginTop: 0, backgroundColor: Color.white }}>
+      <List containerStyle={styles.container}>
         <FlatList
-          data={list_names}
-          keyExtractor={item => item.list_name_encoded}
-          renderItem={this.renderItem}
+          data={data}
+          keyExtractor={item => item.listId}
+          renderItem={({ item }) => this.renderItem(item)}
           ItemSeparatorComponent={this.renderDevider}
         />
       </List>
@@ -45,11 +53,19 @@ class ScreenList extends React.Component {
   }
 }
 
-mapStateToProps = (state) => {
-  const { list_names } = state.list_names
+const mapStateToProps = (state) => {
   return {
-    list_names: state.list_names
+    lists: state.lists
   }
 }
 
-export default connect(mapStateToProps, { fetchListnames: fetchBestsellerListName })(ScreenList)
+const styles = StyleSheet.create({
+  container: {
+    borderTopWidth: 0,
+    borderBottomWidth: 0,
+    marginTop: 0,
+    backgroundColor: Color.white
+  }
+})
+
+export default connect(mapStateToProps, { getBestSellerList: fetchFromBestsellerAPI })(ScreenList);
