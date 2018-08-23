@@ -44,11 +44,14 @@ const MainTabNavigator = createBottomTabNavigator({
   {
     tabBarOptions: {
       activeTintColor: Color.white,
+      inactiveTintColor: Color.grey,
       labelStyle: {
         fontSize: 14,
+        fontFamily: 'Times New Roman',
+        fontWeight: 'medium'
       },
       style: {
-        backgroundColor: Color.tomato1,
+        backgroundColor: Color.pink_red,
       },
     },
   }

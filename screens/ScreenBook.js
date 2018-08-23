@@ -12,7 +12,7 @@ export default class ScreenBook extends React.Component {
     headerTitle: navigation.getParam('list'),
     headerTintColor: Color.white,
     headerStyle: {
-      backgroundColor: Color.tomato1,
+      backgroundColor: Color.pink_red,
     },
   })
 
