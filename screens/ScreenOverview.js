@@ -14,7 +14,7 @@ class ScreenOverview extends React.Component {
     headerTintColor: Color.white,
     headerBackTitle: null,
     headerStyle: {
-      backgroundColor: Color.tomato1,
+      backgroundColor: Color.pink_red,
     },
   })
 

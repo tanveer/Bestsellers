@@ -27,6 +27,7 @@ export default ListRow = props => (
 
 const styles = StyleSheet.create({
   text: {
+    fontFamily: 'Times New Roman',
     fontWeight: 'bold',
     fontSize: 16,
     marginLeft: 10,
