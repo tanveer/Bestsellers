@@ -8,15 +8,16 @@ import {
   TouchableOpacity,
   Button,
   Image,
-  Dimensions, } from 'react-native'
+  Dimensions,
+} from 'react-native'
 import Row from '../Components/Row'
-import {List} from 'react-native-elements'
+import { List } from 'react-native-elements'
 import fetchList from '../Network/Api'
 import Devider from '../Components/devider'
 
 
 export default class BookDetailScreen extends React.Component {
-  static navigationOptions = ({navigation}) => ({
+  static navigationOptions = ({ navigation }) => ({
     headerTitle: navigation.getParam('title'),
     headerTintColor: '#fff',
     headerStyle: {
@@ -25,25 +26,30 @@ export default class BookDetailScreen extends React.Component {
   })
 
   render() {
-    const {width , height} = Dimensions.get('window')
+    const width = Dimensions.get('window').width
+    const height = Dimensions.get('window').height
     const book = this.props.navigation.getParam('book')
     return (
       <ScrollView>
-        <View style={{flex: 1, alignItems: 'center', paddingTop: 25, paddingBottom: 20,}}>
-          <Image source={{
-            uri: book.book_image}}
-            style={{width: 150, height: 225, alignItems: 'center',}}/>
+        <View style={{paddingTop: 10}}>
+            <Image source={{
+              uri: book.book_image
+            }}
+            style={{felx: 1, width: width, height: height / 1.5, resizeMode: 'contain', alignItems: 'center'}} />
+          <View style={{paddingLeft: 10, paddingTop: 5}}>
           <Text style={{
             fontSize: 14,
-            fontFamily: 'HelveticaNeue-Bold', }}>
+            fontFamily: 'HelveticaNeue-Bold',
+          }}>
             {book.title}
           </Text>
           <Text style={{
             fontSize: 12,
             fontFamily: 'HelveticaNeue',
-            padding: 10,}}>
+          }}>
             {book.description}
           </Text>
+          </View>
         </View>
       </ScrollView>
     )

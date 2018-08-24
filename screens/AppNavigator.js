@@ -3,12 +3,15 @@ import { createStackNavigator, createBottomTabNavigator, createSwitchNavigator }
 import ScreenComponentList from './ScreenList'
 import ScreenComponentBook from './ScreenBook'
 import ScreenComponentOverview from './ScreenOverview'
+import BookDetailScreen from './BookDetailScreen'
+
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { Color } from '../src/Color'
 
 const ListNavigator = createStackNavigator({
   ScreenList: ScreenComponentList,
   ScreenBook: ScreenComponentBook,
+  ScreenDetail: BookDetailScreen,
   initialRouteName: 'ScreenList',
 });
 

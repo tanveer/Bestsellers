@@ -6,12 +6,17 @@ const DEVICE_WIDTH = Dimensions.get('window').width
 
 export default Row = props => (
   <View style={{ fekx: 1, padding: 10, minHeight: styles.image.height }}>
-    <TouchableOpacity style={{ flexDirection: 'row' }}>
+    <TouchableOpacity style={{ flexDirection: 'row' }}
+      onPress={() => props.navigation.navigate('ScreenDetail', 
+      {
+        book: {...props}
+      })
+      }>
       <Image
         source={{ uri: props.book_image }}
         style={styles.image} />
 
-      <View style={{ flex: 1, justifyContent: 'flex-start', paddingLeft: 10}}>
+      <View style={{ flex: 1, justifyContent: 'flex-start', paddingLeft: 10 }}>
         <Text style={styles.title}>{props.title}</Text>
         <Text style={styles.subtitle}><Text style={styles.subText}>{'by '}</Text>{props.author}</Text>
         <View style={{ flexDirection: 'felx-end', }}>

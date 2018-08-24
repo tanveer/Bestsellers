@@ -39,7 +39,7 @@ export default class ScreenBook extends React.Component {
       <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0, marginTop: 0, }}>
         <FlatList
           data={this.state.books}
-          renderItem={({ item }) => <Row {...item} updated={this.props.navigation.getParam('updated')} />}
+          renderItem={({ item }) => <Row {...item} navigation={this.props.navigation} />}
           ItemSeparatorComponent={this.renderDevider}
           keyExtractor={item => item.title} />
       </List>
