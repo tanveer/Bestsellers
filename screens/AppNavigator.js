@@ -27,6 +27,7 @@ ListNavigator.navigationOptions = {
 
 const OverviewNavigator = createStackNavigator({
   Overview: ScreenComponentOverview,
+  ScreenDetail: BookDetailScreen,
   initialRouteName: 'Overview',
 });
 

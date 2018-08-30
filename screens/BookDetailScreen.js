@@ -18,7 +18,7 @@ import Devider from '../Components/devider'
 
 export default class BookDetailScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    headerTitle: navigation.getParam('title'),
+    headerTitle: navigation.getParam('book').title,
     headerTintColor: '#fff',
     headerStyle: {
       backgroundColor: '#cc2a36',

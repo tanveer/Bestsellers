@@ -3,10 +3,14 @@ import { Dimensions, StyleSheet, View, TouchableOpacity, Image } from 'react-nat
 const DEVICE_WIDTH = Dimensions.get('window').width
 
 export default TopFiveRow = props => (
-  <TouchableOpacity>
+  <TouchableOpacity onPress={() => props.navigation.navigate('ScreenDetail',
+    {
+      book: { ...props }
+    })
+  }>
     <View style={styles.container}>
       <Image
-        source={{ uri: props.imageLink }}
+        source={{ uri: props.book_image }}
         style={styles.image}
       />
     </View>
