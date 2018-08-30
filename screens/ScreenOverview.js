@@ -27,6 +27,10 @@ class ScreenOverview extends React.Component {
     const bestellers = lists.map(list => ({ listName: list.display_name, data: list.books }))
     const flatten = _.flatten(bestellers.map(books => books.data))
     let books = flatten.map(obj => obj)
+    books = _.uniqBy(books, (book) => {
+      return book.title
+    })
+
 
     if (isFetching) {
       <Text>Loading...</Text>
