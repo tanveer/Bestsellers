@@ -27,10 +27,10 @@ class ScreenOverview extends React.Component {
     const bestellers = lists.map(list => ({ listName: list.display_name, data: list.books }))
     const flatten = _.flatten(bestellers.map(books => books.data))
     let books = flatten.map(obj => obj)
+
     books = _.uniqBy(books, (book) => {
       return book.title
     })
-
 
     if (isFetching) {
       <Text>Loading...</Text>
@@ -40,7 +40,7 @@ class ScreenOverview extends React.Component {
       <FlatList style={styles.list}
         data={books}
         renderItem={({ item }) =>
-          <TopFiveRow {...item} navigation={this.props.navigation}/>
+          <TopFiveRow {...item} navigation={this.props.navigation} />
         }
         numColumns={4}
         keyExtractor={item => item}
