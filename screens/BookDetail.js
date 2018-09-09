@@ -7,14 +7,15 @@ import {
     Text, 
     StyleSheet,
     Dimensions,
+    TouchableOpacity,
 
 } from 'react-native'
 
 import { BlurView } from 'expo'
 
 const blur_radius = 11
-
 export default BookDetail = props => {
+
     return (
         <View style={{ flex: 1 }}>
         <ImageBackground

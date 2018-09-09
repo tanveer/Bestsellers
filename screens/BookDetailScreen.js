@@ -13,8 +13,9 @@ export default class BookDetailScreen extends React.Component {
 
   render() {
     const book = this.props.navigation.getParam('book')
+    const navigation = this.props.navigation.getParam('navigation')
     return (
-      <BookDetail {...book} />
+      <BookDetail {...book} navigation={navigation}/>
     )
   }
 }

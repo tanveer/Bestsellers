@@ -1,11 +1,15 @@
 import React from 'react'
-import { FlatList, StyleSheet, Text, View, TouchableOpacity, Button, Image } from 'react-native'
+import { Dimensions, FlatList, StyleSheet, Text, View, TouchableOpacity, Button, Image } from 'react-native'
 import Row from '../Components/Row'
 import { List } from 'react-native-elements'
 import fetchList from '../Network/Api'
 import Devider from '../Components/devider'
 import { Color } from '../src/Color';
+import Carousel from 'react-native-snap-carousel'
+import Card from './Card'
 
+const HEIGHT = Dimensions.get('window').height
+const WIDTH = Dimensions.get('window').width
 
 export default class ScreenBook extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -36,13 +40,12 @@ export default class ScreenBook extends React.Component {
 
   render() {
     return (
-      <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0, marginTop: 0, }}>
-        <FlatList
-          data={this.state.books}
-          renderItem={({ item }) => <Row {...item} navigation={this.props.navigation} />}
-          ItemSeparatorComponent={this.renderDevider}
-          keyExtractor={item => item.title} />
-      </List>
+      <Carousel layout={'default'}
+        data={this.state.books}
+        renderItem={({ item }) => <Card {...item} navigation={this.props.navigation} />}
+        sliderWidth={WIDTH}
+        itemWidth={WIDTH}
+        keyExtractor={item => item.title} />
     )
   }
 }
